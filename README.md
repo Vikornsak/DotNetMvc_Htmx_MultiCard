@@ -94,4 +94,4 @@ dotnet run
 * **Validation**: You can add DataAnnotations to `ItemInput` and plug in ASP.NET Core client-side validation (jQuery Validate + unobtrusive) if you want inline validation messages.
 * **CSRF/Anti-forgery**: If you enable it, include the anti-forgery token in htmx requests (e.g., via a hidden input + `hx-headers` or `hx-include`).
 
-If you want, I can add a fourth card type or wire this up to EF Core with a sample database schema.
+
