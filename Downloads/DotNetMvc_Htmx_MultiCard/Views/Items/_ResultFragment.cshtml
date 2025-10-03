@@ -1,0 +1,68 @@
+@model CreateItemsResultVm
+
+<div class="alert alert-success" role="alert">
+  <strong>Saved!</strong> @Model.Items.Count item(s). Grand Total: @Model.Total.ToString("0.00")
+</div>
+
+<table class="table table-hover align-middle">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Type</th>
+      <th>Summary</th>
+      <th class="text-end">Line Total</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+
+  @for (int idx = 0; idx < Model.Items.Count; idx++)
+  {
+    var it = Model.Items[idx];
+    var type = it.Type?.ToLowerInvariant();
+    <tr>
+      <td>@(idx + 1)</td>
+      <td>@it.Type</td>
+      <td>
+        @if (type == "product")
+        {
+          var qty = it.Qty ?? 0;
+          var price = it.Price ?? 0m;
+          <text>@it.Name - qty @qty, price @price.ToString("0.00")</text>
+          if (!string.IsNullOrWhiteSpace(it.Sku))
+          {
+            <text> | SKU @it.Sku</text>
+          }
+          if (!string.IsNullOrWhiteSpace(it.Category))
+          {
+            <text> | @it.Category</text>
+          }
+        }
+        else if (type == "service")
+        {
+          var hours = it.Hours ?? 0m;
+          var rate = it.Rate ?? 0m;
+          <text>@it.Desc - @hours h × @rate.ToString("0.00")</text>
+          if (it.Tax.HasValue)
+          {
+            <text> (+ tax @it.Tax.Value.ToString("0.##")%)</text>
+          }
+        }
+        else
+        {
+          var title = it.Title ?? string.Empty;
+          var content = it.Content ?? string.Empty;
+          var trimmed = content.Length > 60 ? content.Substring(0, 60) + "..." : content;
+          <text>@title - @trimmed</text>
+          if (!string.IsNullOrWhiteSpace(it.Tag))
+          {
+            <text> [@it.Tag]</text>
+          }
+        }
+      </td>
+      <td class="text-end">@it.LineTotal.ToString("0.00")</td>
+    </tr>
+  }
+  
+  </tbody>
+</table>

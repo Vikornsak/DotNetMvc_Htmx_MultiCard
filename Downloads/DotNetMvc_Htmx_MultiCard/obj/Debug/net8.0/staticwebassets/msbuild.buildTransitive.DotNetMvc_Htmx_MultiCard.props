@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/DotNetMvc_Htmx_MultiCard.props" />
+</Project>

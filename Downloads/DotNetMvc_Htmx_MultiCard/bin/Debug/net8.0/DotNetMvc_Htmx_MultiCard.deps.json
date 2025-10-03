@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "DotNetMvc_Htmx_MultiCard/1.0.0": {
+        "runtime": {
+          "DotNetMvc_Htmx_MultiCard.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DotNetMvc_Htmx_MultiCard/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

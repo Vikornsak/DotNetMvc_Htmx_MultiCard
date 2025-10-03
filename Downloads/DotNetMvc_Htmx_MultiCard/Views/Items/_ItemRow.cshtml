@@ -1,0 +1,112 @@
+@model ItemRowVm
+@{
+    var i = Model.Index;
+    var variant = (Model.Variant ?? "product").ToLowerInvariant();
+}
+
+<div class="item-row" data-index="@i">
+  <input type="hidden" name="Items[@i].Type" value="@variant" />
+
+  @if (variant == "product")
+  {
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Product</strong>
+        <button type="button"
+                class="btn-close"
+                aria-label="Remove"
+                hx-get="/Items/RemoveRow"
+                hx-target="closest .item-row"
+                hx-swap="outerHTML"></button>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Name</label>
+            <input class="form-control" name="Items[@i].Name" placeholder="Item name" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Quantity</label>
+            <input class="form-control" type="number" min="0" name="Items[@i].Qty" placeholder="0" required />
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Price</label>
+            <input class="form-control" type="number" step="0.01" min="0" name="Items[@i].Price" placeholder="0.00" required />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">SKU</label>
+            <input class="form-control" name="Items[@i].Sku" placeholder="SKU-001" />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Category</label>
+            <input class="form-control" name="Items[@i].Category" placeholder="e.g. Office" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  else if (variant == "service")
+  {
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Service</strong>
+        <button type="button"
+                class="btn-close"
+                aria-label="Remove"
+                hx-get="/Items/RemoveRow"
+                hx-target="closest .item-row"
+                hx-swap="outerHTML"></button>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="Items[@i].Desc" placeholder="Describe the service..." required></textarea>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Hours</label>
+            <input class="form-control" type="number" min="0" step="0.5" name="Items[@i].Hours" placeholder="0" required />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Rate</label>
+            <input class="form-control" type="number" min="0" step="0.01" name="Items[@i].Rate" placeholder="0.00" required />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Tax %</label>
+            <input class="form-control" type="number" min="0" step="0.01" name="Items[@i].Tax" placeholder="7.00" />
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  else
+  {
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Note</strong>
+        <button type="button"
+                class="btn-close"
+                aria-label="Remove"
+                hx-get="/Items/RemoveRow"
+                hx-target="closest .item-row"
+                hx-swap="outerHTML"></button>
+      </div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Title</label>
+            <input class="form-control" name="Items[@i].Title" placeholder="Note title" required />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Tag</label>
+            <input class="form-control" name="Items[@i].Tag" placeholder="e.g. internal" />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Content</label>
+            <textarea class="form-control" name="Items[@i].Content" placeholder="Write something..." required></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
